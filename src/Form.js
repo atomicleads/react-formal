@@ -605,11 +605,11 @@ class Form extends React.PureComponent {
                 let fieldName = match[1];
                 for (let i in this.props.touched) {
                     if (fieldName === i) {
-                        return false
+                        return
                     }
                 }
             }
-            throw e
+            return  e
         }
     }
 
