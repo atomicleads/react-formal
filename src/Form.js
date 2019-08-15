@@ -532,21 +532,6 @@ class Form extends React.PureComponent {
         }, delay)
     }
 
-    handleWhenExceptions(e) {
-        console.log("handle When exception", e.toString());
-        //The schema does not contain the path: usAddress.zip
-        let noPathRe = /The schema does not contain the path: ([\w\._-]+)/;
-        let match = noPathRe.exec(e.toString());
-        if (match != null) {
-            let fieldName = match[0];
-            for (let i of this.props.touched) {
-                if (fieldName === i) {
-                    return
-                }
-            }
-        }
-    }
-
     submit = () => {
         let {
             schema,
@@ -613,7 +598,18 @@ class Form extends React.PureComponent {
             if (e instanceof ValidationError) {
                 return e
             }
-            console.log("SHIT CATCHED!", e.toString())
+            console.log("handle When exception", e.toString());
+            //The schema does not contain the path: usAddress.zip
+            let noPathRe = /The schema does not contain the path: ([\w\._-]+)/;
+            let match = noPathRe.exec(e.toString());
+            if (match != null) {
+                let fieldName = match[0];
+                for (let i of this.props.touched) {
+                    if (fieldName === i) {
+                        return false
+                    }
+                }
+            }
             return e
         }
     }
