@@ -605,7 +605,7 @@ class Form extends React.PureComponent {
         return schema
             .validateAt(path, value, {...options, abortEarly})
             .then(() => null)
-            .catch(err => err)
+            .catch(e => this.handleWhenExceptions(e))
     }
 
     render() {
