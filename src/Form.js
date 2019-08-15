@@ -22,7 +22,7 @@ let BindingContext = BC.ControlledComponent
 
 let done = e =>
     setTimeout(() => {
-        console.log("this is done" ,e);
+        console.log("this is done", e);
         throw e
     });
 
@@ -499,7 +499,11 @@ class Form extends React.PureComponent {
     }
 
     collectErrors(fields, props = this.props) {
-        return this.errors.collect(fields, props.errors, {props})
+        try {
+            return this.errors.collect(fields, props.errors, {props})
+        } catch (e) {
+            console.log("collectErrrorsEx", e);
+        }
     }
 
     enqueue(fields) {
