@@ -15,6 +15,7 @@ import errorManager from './errorManager'
 import errToJSON from './utils/errToJSON'
 import * as ErrorUtils from './utils/ErrorUtils'
 import {FormActionsContext, FormDataContext} from './Contexts'
+import {ValidationError} from "yup";
 
 const batchedUpdates = ReactDOM.unstable_batchedUpdates || (fn => fn())
 
@@ -609,7 +610,11 @@ class Form extends React.PureComponent {
         try {
             return await schema.validateAt(path, value, {...options, abortEarly})
         } catch (e) {
-            console.log("SHIT CATCHED!", e)
+            if (e instanceof ValidationError) {
+                return e
+            }
+            console.log("SHIT CATCHED!", e.toString())
+            return e
         }
     }
 
