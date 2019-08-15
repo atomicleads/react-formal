@@ -598,7 +598,7 @@ class Form extends React.PureComponent {
             if (e instanceof ValidationError) {
                 return e
             }
-            let noPathRe = /The schema does not contain the path: ([\w\._-]+)/;
+            let noPathRe = /The schema does not contain the path: ([\w\._-]+)\./;
             let match = noPathRe.exec(e.toString());
             console.log("shit exception", match[1], this.props.touched);
             if (match != null) {
@@ -609,7 +609,7 @@ class Form extends React.PureComponent {
                     }
                 }
             }
-            return e
+            throw e
         }
     }
 
