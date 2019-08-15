@@ -607,9 +607,10 @@ class Form extends React.PureComponent {
         let {value, schema} = props
 
         try {
-            return await schema.validateAt(path, value, {...options, abortEarly})
-        }catch (e) {
-            console.log("SHIT CATCHED!")
+            await schema.validateAt(path, value, {...options, abortEarly})
+            return
+        } catch (e) {
+            console.log("SHIT CATCHED!", e)
         }
     }
 
