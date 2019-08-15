@@ -527,6 +527,7 @@ class Form extends React.PureComponent {
     }
 
     handleWhenExceptions(e) {
+        console.log("handle When exception", e.toString());
         //The schema does not contain the path: usAddress.zip
         let noPathRe = /The schema does not contain the path: ([\w\._-]+)/;
         let match = noPathRe.exec(e.toString());
