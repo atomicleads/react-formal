@@ -22,8 +22,9 @@ let BindingContext = BC.ControlledComponent
 
 let done = e =>
     setTimeout(() => {
+        console.log("this is done" ,e);
         throw e
-    })
+    });
 
 let isValidationError = err => err && err.name === 'ValidationError'
 
@@ -522,7 +523,7 @@ class Form extends React.PureComponent {
                         this.notify('onError', errors)
                     }
                 })
-                .catch(this.handleWhenExceptions)
+                .catch(done)
         }, delay)
     }
 
