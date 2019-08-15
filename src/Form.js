@@ -544,7 +544,6 @@ class Form extends React.PureComponent {
                 }
             }
         }
-        done(e);
     }
 
     submit = () => {
@@ -601,16 +600,17 @@ class Form extends React.PureComponent {
         return this.collectErrors(fields)
     }
 
-    validatePath = (path, {props}) => {
+    validatePath = async (path, {props}) => {
         let options = pick(props, YUP_OPTIONS)
         let abortEarly = options.abortEarly == null ? false : options.abortEarly
 
         let {value, schema} = props
 
-        return schema
-            .validateAt(path, value, {...options, abortEarly})
-            .then(() => null)
-            .catch(e => this.handleWhenExceptions(e))
+        try {
+            return await schema.validateAt(path, value, {...options, abortEarly})
+        }catch (e) {
+            console.log("SHIT CATCHED!")
+        }
     }
 
     render() {
