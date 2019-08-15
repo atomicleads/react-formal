@@ -593,15 +593,15 @@ class Form extends React.PureComponent {
         let {value, schema} = props
 
         try {
-            return await schema.validateAt(path, value, {...options, abortEarly})
+            const res = await schema.validateAt(path, value, {...options, abortEarly})
+            console.log("res", res)
+            return res
         } catch (e) {
             if (e instanceof ValidationError) {
                 return e
             }
             let noPathRe = /The schema does not contain the path: ([\w\._-]+)\./;
             let match = noPathRe.exec(e.toString());
-
-            console.log("shit exception", match[1], this.props.touched);
 
             if (match != null) {
                 let fieldName = match[1];
@@ -611,6 +611,8 @@ class Form extends React.PureComponent {
                     }
                 }
             }
+
+            console.log("real err", e)
             throw e
         }
     }
