@@ -593,8 +593,7 @@ class Form extends React.PureComponent {
         let {value, schema} = props
 
         try {
-            const res = await schema.validateAt(path, value, {...options, abortEarly})
-            console.log("res", res)
+            await schema.validateAt(path, value, {...options, abortEarly})
         } catch (e) {
             if (e instanceof ValidationError) {
                 return e
@@ -610,8 +609,6 @@ class Form extends React.PureComponent {
                     }
                 }
             }
-
-            console.log("real err", e)
             throw e
         }
     }
