@@ -23,7 +23,6 @@ let BindingContext = BC.ControlledComponent
 
 let done = e =>
     setTimeout(() => {
-        console.log("this is done", e);
         throw e
     });
 
